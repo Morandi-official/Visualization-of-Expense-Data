@@ -2,9 +2,7 @@ name = "visualization-of-expense-data"
 compatibility_date = "2026-06-06"
 pages_build_output_dir = "."
 
-# 创建 D1 后，把 database_id 替换为 Cloudflare 返回的真实 ID。
-# 代码中固定使用 env.DB，因此 binding 必须保持为 DB。
-[[d1_databases]]
-binding = "DB"
-database_name = "expense-data-db"
-database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+# D1 数据库绑定请在 Cloudflare Pages 控制台中配置：
+# Pages 项目 -> Settings -> Bindings -> Add -> D1 database bindings
+# 变量名必须填写 DB，并选择你的 expense-data-db 数据库。
+# 不在这里放占位 database_id，避免部署时报 Invalid database UUID。
