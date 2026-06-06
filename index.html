@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>江阴中医院治疗费用合并统计</title>
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="top">
+      <div>
+        <p class="tag">Expense Dashboard</p>
+        <h1>江阴中医院治疗费用合并统计</h1>
+        <p class="sub">统计范围：<span id="range">2026-02-20 至 2026-06-02</span> ｜ 统计口径：按账单记录金额（含押金/预付款）</p>
+      </div>
+      <div class="topBtns">
+        <button id="exportCsv" class="btn light">导出CSV</button>
+        <button id="refresh" class="btn">刷新</button>
+      </div>
+    </header>
+
+    <section class="cards">
+      <div class="card blue"><b>原统计合计</b><strong id="oldTotal">¥0.00</strong></div>
+      <div class="card green"><b>新增金额</b><strong id="newTotal">¥0.00</strong><small id="newPct">新增占总额 0%</small></div>
+      <div class="card yellow"><b>合并总额</b><strong id="allTotal">¥0.00</strong></div>
+      <div class="card purple"><b>记录条数</b><strong id="count">0 条</strong></div>
+    </section>
+
+    <main class="grid">
+      <section class="panel">
+        <h2><span>一</span>费用大致分类汇总</h2>
+        <div class="tableBox"><table><thead><tr><th>分类</th><th>金额</th><th>占比</th><th>条数</th><th>颜色</th></tr></thead><tbody id="catRows"></tbody></table></div>
+        <div class="note"><b>分类说明：</b><br>分类用于家庭记账与费用结构分析；新增时可手动选择分类。气垫床按407.16元录入。</div>
+      </section>
+
+      <section class="panel">
+        <h2><span>二</span>饼图分析</h2>
+        <h3>分类占比饼图</h3>
+        <div class="pieArea"><div id="pie"></div><div id="legend" class="legend"></div></div>
+      </section>
+
+      <section class="panel months">
+        <h2><span>三</span>月度费用分布</h2>
+        <div id="months"></div>
+      </section>
+
+      <section class="panel inputPanel">
+        <h2><span>录</span>每日新增费用录入</h2>
+        <div id="status" class="status">正在读取云端数据……</div>
+        <form id="form">
+          <input type="hidden" id="id">
+          <label>管理员口令<input id="pin" type="password" placeholder="Cloudflare ADMIN_PIN"></label>
+          <div class="two"><label>日期<input id="date" type="date" required></label><label>金额（元）<input id="amount" type="number" step="0.01" min="0" required></label></div>
+          <label>项目<input id="item" required placeholder="例如：纸尿裤 / 护工费"></label>
+          <div class="two"><label>分类<select id="category"></select></label><label>来源<select id="source"><option>新增</option><option>原统计</option></select></label></div>
+          <label>备注<textarea id="note" rows="3" placeholder="校对说明、发票情况等"></textarea></label>
+          <div class="actions"><button class="btn" id="save">保存记录</button><button type="button" id="cancel" class="btn light hide">取消编辑</button><button type="reset" class="btn light">清空</button></div>
+          <p class="hint">写入、编辑、删除需要管理员口令；口令只保存在本机浏览器。</p>
+        </form>
+      </section>
+
+      <section class="panel ledger">
+        <h2><span>四</span>全部费用记录明细（含原统计+新增记录）</h2>
+        <div class="toolbar"><input id="search" placeholder="筛选日期、项目、分类或来源"><em>已修正：12楼护工归到3月13日；睡衣归到4月18日；气垫床407.16元；湿纸巾32+58已更正。</em></div>
+        <div id="tables" class="tables"></div>
+      </section>
+    </main>
+    <footer>注：网站样式参考当前统计图UI，面向电脑屏幕优化；数据保存到 Cloudflare D1，新增后图表自动更新。</footer>
+  </div>
+  <script type="module" src="/assets/app.js"></script>
+</body>
+</html>
