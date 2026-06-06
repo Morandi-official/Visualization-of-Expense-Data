@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>医疗费用合并统计</title>
-  <link rel="stylesheet" href="/assets/styles.css?v=20260606-layout2" />
+  <link rel="stylesheet" href="/assets/styles.css?v=20260606-role1" />
 </head>
 <body>
   <div class="page">
@@ -15,6 +15,9 @@
         <p class="sub">统计范围：<span id="range">2026-02-20 至 2026-06-02</span> ｜ 统计口径：按账单记录金额（含押金/预付款）</p>
       </div>
       <div class="topBtns">
+        <span id="roleBadge" class="roleBadge">访客模式</span>
+        <button id="visitorBtn" class="btn light">访客查看</button>
+        <button id="accountantBtn" class="btn">会计登录</button>
         <button id="exportCsv" class="btn light">导出CSV</button>
         <button id="refresh" class="btn">刷新</button>
       </div>
@@ -45,29 +48,37 @@
         <div id="months"></div>
       </section>
 
-      <section class="panel inputPanel">
-        <h2><span>录</span>每日新增费用录入</h2>
-        <div id="status" class="status">正在读取云端数据……</div>
-        <form id="form">
-          <input type="hidden" id="id">
-          <label>管理员口令<input id="pin" type="password" placeholder="Cloudflare ADMIN_PIN"></label>
-          <div class="two"><label>日期<input id="date" type="date" required></label><label>金额（元）<input id="amount" type="number" step="0.01" min="0" required></label></div>
-          <label>项目<input id="item" required placeholder="例如：纸尿裤 / 护工费"></label>
-          <div class="two"><label>分类<select id="category"></select></label><label>来源<input id="source" list="sourceOptions" value="新增" placeholder="可自定义，如：6月6日批次新增" required><datalist id="sourceOptions"><option value="新增"><option value="原统计"></datalist></label></div>
-          <label>备注<textarea id="note" rows="3" placeholder="校对说明、发票情况等"></textarea></label>
-          <div class="actions"><button class="btn" id="save">保存记录</button><button type="button" id="cancel" class="btn light hide">取消编辑</button><button type="reset" class="btn light">清空</button></div>
-          <p class="hint">写入、编辑、删除需要管理员口令；来源支持自定义，例如“6月6日批次新增”。口令只保存在本机浏览器。</p>
-        </form>
-      </section>
+      <section class="panel workbench">
+        <section class="inputPanel" id="inputPanel">
+          <h2><span>录</span>每日新增费用录入</h2>
+          <div id="status" class="status">正在读取云端数据……</div>
+          <div id="loginBox" class="loginBox">
+            <p>当前为访客模式，可查看统计和明细。会计登录后可新增、编辑、删除，登录一次后本机浏览器会记住口令。</p>
+            <div class="loginRow"><input id="loginPin" type="password" placeholder="输入会计密码"><button id="loginBtn" type="button" class="btn">进入会计模式</button></div>
+          </div>
+          <form id="form">
+            <input type="hidden" id="id">
+            <div class="two"><label>日期<input id="date" type="date" required></label><label>金额（元）<input id="amount" type="number" step="0.01" min="0" required></label></div>
+            <label>项目<input id="item" required placeholder="例如：纸尿裤 / 护工费"></label>
+            <div class="two"><label>分类<select id="category"></select></label><label>来源<input id="source" list="sourceOptions" value="新增" placeholder="可自定义，如：6月6日批次新增" required><datalist id="sourceOptions"><option value="新增"><option value="原统计"></datalist></label></div>
+            <label>备注<textarea id="note" rows="2" placeholder="校对说明、发票情况等"></textarea></label>
+            <div class="actions"><button class="btn" id="save">保存记录</button><button type="button" id="cancel" class="btn light hide">取消编辑</button><button type="reset" class="btn light">清空</button></div>
+            <p class="hint">来源支持自定义，例如“6月6日批次新增”。访客模式下此区域会锁定。</p>
+          </form>
+        </section>
 
-      <section class="panel ledger">
-        <h2><span>四</span>全部费用记录明细（含原统计+新增记录）</h2>
-        <div class="toolbar"><input id="search" placeholder="筛选日期、项目、分类或来源"><em>已修正：12楼护工归到3月13日；睡衣归到4月18日；气垫床407.16元；湿纸巾32+58已更正。</em></div>
-        <div id="tables" class="tables"></div>
+        <section class="ledgerInline">
+          <div class="ledgerHead">
+            <h2><span>四</span>全部费用记录明细（含原统计+新增记录）</h2>
+            <div class="toolbar"><input id="search" placeholder="筛选日期、项目、分类或来源"></div>
+          </div>
+          <em class="fixNote">已修正：12楼护工归到3月13日；睡衣归到4月18日；气垫床407.16元；湿纸巾32+58已更正。</em>
+          <div id="tables" class="tables"></div>
+        </section>
       </section>
     </main>
-    <footer>注：网站样式参考当前统计图UI，面向电脑屏幕优化；数据保存到 Cloudflare D1，新增后图表自动更新。</footer>
+    <footer>注：访客无需密码，可查看统计；会计登录后可录入、编辑和删除，数据保存到 Cloudflare D1。</footer>
   </div>
-  <script type="module" src="/assets/app.js?v=20260606-layout2"></script>
+  <script type="module" src="/assets/app.js?v=20260606-role1"></script>
 </body>
 </html>
