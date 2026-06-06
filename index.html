@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>医疗费用合并统计</title>
-  <link rel="stylesheet" href="/assets/styles.css?v=stable-20260606-2" />
+  <link rel="stylesheet" href="/assets/styles.css?v=stable-20260606-3" />
 </head>
-<body>
+<body class="simpleMode">
   <div class="page">
     <header class="top">
       <div>
@@ -15,6 +15,8 @@
         <p class="sub">统计范围：<span id="range">2026-02-20 至 2026-06-02</span> ｜ 统计口径：按账单记录金额（含押金/预付款）</p>
       </div>
       <div class="topBtns">
+        <button id="simpleModeBtn" class="btn light viewBtn" type="button">简洁模式</button>
+        <button id="detailModeBtn" class="btn light viewBtn" type="button">详细模式</button>
         <span id="roleBadge" class="roleBadge">访客模式</span>
         <button id="visitorBtn" class="btn light" type="button">访客查看</button>
         <button id="accountantBtn" class="btn" type="button">会计登录</button>
@@ -31,13 +33,13 @@
     </section>
 
     <main class="grid">
-      <section class="panel">
+      <section class="panel overviewPanel">
         <h2><span>一</span>费用大致分类汇总</h2>
         <div class="tableBox"><table><thead><tr><th>分类</th><th>金额</th><th>占比</th><th>条数</th><th>颜色</th></tr></thead><tbody id="catRows"></tbody></table></div>
         <div class="note"><b>分类说明：</b><br>分类用于家庭记账与费用结构分析；新增时可手动选择分类。气垫床按407.16元录入。</div>
       </section>
 
-      <section class="panel">
+      <section class="panel chartPanel">
         <h2><span>二</span>饼图分析</h2>
         <h3>分类占比饼图</h3>
         <div class="pieArea"><div id="pie"></div><div id="legend" class="legend"></div></div>
@@ -77,8 +79,9 @@
         </section>
       </section>
     </main>
-    <footer>注：访客无需密码，可查看统计；会计登录后可录入、编辑和删除，数据保存到 Cloudflare D1。</footer>
+    <footer>注：访客无需密码，可查看统计；会计登录后可录入、编辑和删除，数据保存到 Cloudflare D1。默认进入简洁模式，点击“详细模式”可查看统计图和录入区。</footer>
   </div>
-  <script src="/assets/app.js?v=stable-20260606-2" defer></script>
+  <script src="/assets/app.js?v=stable-20260606-3" defer></script>
+  <script src="/assets/view-mode.js?v=stable-20260606-3" defer></script>
 </body>
 </html>
