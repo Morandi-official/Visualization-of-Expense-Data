@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>医疗费用合并统计</title>
-  <link rel="stylesheet" href="/assets/styles.css?v=20260606-role1" />
+  <link rel="stylesheet" href="/assets/styles.css?v=stable-20260606-2" />
 </head>
 <body>
   <div class="page">
@@ -16,10 +16,10 @@
       </div>
       <div class="topBtns">
         <span id="roleBadge" class="roleBadge">访客模式</span>
-        <button id="visitorBtn" class="btn light">访客查看</button>
-        <button id="accountantBtn" class="btn">会计登录</button>
-        <button id="exportCsv" class="btn light">导出CSV</button>
-        <button id="refresh" class="btn">刷新</button>
+        <button id="visitorBtn" class="btn light" type="button">访客查看</button>
+        <button id="accountantBtn" class="btn" type="button">会计登录</button>
+        <button id="exportCsv" class="btn light" type="button">导出CSV</button>
+        <button id="refresh" class="btn" type="button">刷新</button>
       </div>
     </header>
 
@@ -51,9 +51,9 @@
       <section class="panel workbench">
         <section class="inputPanel" id="inputPanel">
           <h2><span>录</span>每日新增费用录入</h2>
-          <div id="status" class="status">正在读取云端数据……</div>
+          <div id="status" class="status">正在加载费用数据……</div>
           <div id="loginBox" class="loginBox">
-            <p>当前为访客模式，可查看统计和明细。会计登录后可新增、编辑、删除，登录一次后本机浏览器会记住口令。</p>
+            <p>当前为访客模式，可查看统计和明细。会计输入密码后可新增、编辑、删除；本机浏览器会记住一次登录。</p>
             <div class="loginRow"><input id="loginPin" type="password" placeholder="输入会计密码"><button id="loginBtn" type="button" class="btn">进入会计模式</button></div>
           </div>
           <form id="form">
@@ -62,8 +62,8 @@
             <label>项目<input id="item" required placeholder="例如：纸尿裤 / 护工费"></label>
             <div class="two"><label>分类<select id="category"></select></label><label>来源<input id="source" list="sourceOptions" value="新增" placeholder="可自定义，如：6月6日批次新增" required><datalist id="sourceOptions"><option value="新增"><option value="原统计"></datalist></label></div>
             <label>备注<textarea id="note" rows="2" placeholder="校对说明、发票情况等"></textarea></label>
-            <div class="actions"><button class="btn" id="save">保存记录</button><button type="button" id="cancel" class="btn light hide">取消编辑</button><button type="reset" class="btn light">清空</button></div>
-            <p class="hint">来源支持自定义，例如“6月6日批次新增”。访客模式下此区域会锁定。</p>
+            <div class="actions"><button class="btn" id="save" type="submit">保存记录</button><button type="button" id="cancel" class="btn light hide">取消编辑</button><button type="reset" class="btn light">清空</button></div>
+            <p class="hint">来源支持自定义，例如“6月6日批次新增”。访客模式下录入区会锁定。</p>
           </form>
         </section>
 
@@ -79,6 +79,6 @@
     </main>
     <footer>注：访客无需密码，可查看统计；会计登录后可录入、编辑和删除，数据保存到 Cloudflare D1。</footer>
   </div>
-  <script type="module" src="/assets/app.js?v=20260606-role1"></script>
+  <script src="/assets/app.js?v=stable-20260606-2" defer></script>
 </body>
 </html>
